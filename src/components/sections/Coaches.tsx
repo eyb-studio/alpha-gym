@@ -5,7 +5,7 @@ import type { Dictionary } from "@/lib/dictionaries";
 type Props = { dict: Dictionary };
 
 const COACH_IMAGES = [
-  "https://images.unsplash.com/photo-1583500178690-f7fd39c75c5d?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1605296867424-35fc25c9212a?q=80&w=1200&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=1200&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop",
 ];
