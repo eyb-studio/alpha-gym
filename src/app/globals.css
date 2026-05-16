@@ -1,26 +1,357 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Palette — pure cinematic monochrome */
+  --color-ink: #000000;
+  --color-bone: #f5f2ec;
+  --color-bone-dim: #e8e3d8;
+  --color-ash: #c9c5bd;
+  --color-stone: #8a877f;
+  --color-slate: #4a4843;
+  --color-coal: #1c1b19;
+  --color-pitch: #0a0a0a;
+
+  /* Typography */
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+  --font-arabic: var(--font-tajawal);
+
+  /* Easings — long, weighted, cinematic */
+  --ease-cinema: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-curtain: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-rise: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* `clip` (Safari 16+) prevents horizontal overflow WITHOUT turning the
+       element into a scroll container. On iOS Safari, `overflow-x: hidden`
+       on <body> promotes it to a scroll container, which zeros out
+       window.scrollY and breaks IntersectionObserver's viewport root. */
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    background: var(--color-ink);
+    color: var(--color-bone);
+  }
+
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic), var(--font-sans), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: var(--color-bone);
+    color: var(--color-ink);
+  }
+
+  /* Custom dot cursor on desktop */
+  @media (hover: hover) and (pointer: fine) {
+    html.has-custom-cursor,
+    html.has-custom-cursor * {
+      cursor: none !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.02;
+  }
+
+  .text-mono {
+    font-family: var(--font-mono), monospace;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  .text-arabic-display {
+    font-family: var(--font-arabic), sans-serif;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.15;
+  }
+
+  /* Grain overlay — applied via the GrainOverlay component */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("/grain.svg");
+    background-size: 256px 256px;
+    background-repeat: repeat;
+  }
+
+  /* Subtle vignette */
+  .vignette::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+
+  /* B&W cinema photo treatment */
+  .cinema-img {
+    filter: grayscale(1) contrast(1.1) brightness(0.85);
+  }
+
+  /* Thin stroke rectangle — for callouts/quotes */
+  .frame-thin {
+    border: 1px solid var(--color-bone);
+    /* slight inset shadow to feel etched */
+    box-shadow: inset 0 0 0 0.5px rgba(245, 242, 236, 0.2);
+  }
+}
+
+/* ─── Intro animation ──────────────────────────────────────────
+   Pure CSS so it works identically on every browser including
+   mobile WebKit (where motion/react's pathLength can fail). */
+
+.alpha-intro {
+  animation: alpha-intro-fade-out 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 3s;
+}
+
+@keyframes alpha-intro-fade-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.alpha-intro-stage {
+  animation: alpha-intro-scale 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes alpha-intro-scale {
+  from {
+    transform: scale(0.94);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Outline strokes draw in via stroke-dashoffset */
+.alpha-intro-stroke {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  animation: alpha-intro-draw 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.alpha-intro-stroke-2 {
+  animation-delay: 0.05s;
+}
+.alpha-intro-stroke-3 {
+  animation-delay: 0.3s;
+}
+.alpha-intro-stroke-4 {
+  animation-delay: 0.7s;
+}
+
+@keyframes alpha-intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Outline fades out as filled W fades in */
+.alpha-intro-outline {
+  animation: alpha-intro-outline-out 0.5s ease-in 1.4s forwards;
+}
+@keyframes alpha-intro-outline-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.alpha-intro-fill {
+  opacity: 0;
+  animation: alpha-intro-fade-in 0.5s ease-out 1.4s forwards;
+}
+
+@keyframes alpha-intro-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.alpha-intro-wordmark {
+  opacity: 0;
+  transform: translateY(8px);
+  transform-origin: center;
+  animation: alpha-intro-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+}
+
+@keyframes alpha-intro-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alpha-intro-underline {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  opacity: 0;
+  animation: alpha-intro-underline 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.15s
+    forwards;
+}
+
+@keyframes alpha-intro-underline {
+  to {
+    stroke-dashoffset: 0;
+    opacity: 0.6;
+  }
+}
+
+.alpha-intro-subline {
+  opacity: 0;
+  animation: alpha-intro-sub 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2.3s forwards;
+}
+
+@keyframes alpha-intro-sub {
+  to {
+    opacity: 0.45;
+  }
+}
+
+.alpha-intro-skip {
+  opacity: 0;
+  animation: alpha-intro-sub 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+}
+
+/* While intro plays, hide the rest of the page so we never see Hero/Nav flash
+   before the intro overlay establishes itself. */
+html.intro-playing main,
+html.intro-playing header,
+html.intro-playing footer {
+  visibility: hidden;
+}
+
+/* ─── Reveal system ─────────────────────────────────────────
+   Elements with .reveal start hidden; they animate in when
+   the intro completes (html.intro-done). Failsafe: if JS never
+   fires (broken/disabled), reveal happens after 4s regardless. */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  /* Failsafe — even if JS never fires intro-done, this triggers
+     after 4 seconds so the page is never permanently blank. */
+  animation: reveal-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 4s both;
+}
+
+.reveal-from-y-up {
+  transform: translateY(60px);
+}
+
+html.intro-done .reveal {
+  animation: reveal-rise 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s) both;
+}
+
+@keyframes reveal-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-fade {
+  opacity: 0;
+  animation: reveal-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) 4s both;
+}
+
+html.intro-done .reveal-fade {
+  animation: reveal-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s) both;
+}
+
+@keyframes reveal-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-scroll-pulse {
+  animation: scroll-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* ─── Scroll Reveal ────────────────────────────────────────────
+   Used by the <Reveal> component. Pure CSS transition triggered
+   by an IntersectionObserver. Works on every browser including mobile. */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-from-y, 40px));
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.scroll-reveal-fade {
+  transform: none;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .alpha-intro {
+    animation-duration: 0.4s;
+    animation-delay: 0.3s;
+  }
+  .alpha-intro-stroke,
+  .alpha-intro-outline,
+  .alpha-intro-fill,
+  .alpha-intro-wordmark,
+  .alpha-intro-underline,
+  .alpha-intro-subline,
+  .alpha-intro-skip {
+    animation-duration: 0.3s !important;
+    animation-delay: 0s !important;
+  }
+  .scroll-reveal {
+    transition-duration: 0.2s !important;
+    transform: none !important;
+  }
+}
+
+/* RTL adjustments — flip directional things */
+html[dir="rtl"] .flip-rtl {
+  transform: scaleX(-1);
 }

@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "title": "Alpha Gym — No Crowds. No Noise. Just Work.",
+    "description": "Sharjah's premier powerlifting and bodybuilding gym. Old-school iron. Modern facility. Quiet, uncrowded, uncompromising."
+  },
+  "nav": {
+    "disciplines": "Disciplines",
+    "coaches": "Coaches",
+    "meals": "Meals",
+    "membership": "Membership",
+    "contact": "Contact",
+    "join": "Become Alpha"
+  },
+  "hero": {
+    "eyebrow": "Sharjah · Est. 2023",
+    "headline_top": "TRAIN ×",
+    "headline_bottom": "SOCIALIZE",
+    "tagline": "No crowds. No noise. Just work.",
+    "cta_primary": "Become Alpha",
+    "cta_secondary": "Book a tour",
+    "scroll": "Scroll"
+  },
+  "manifesto": {
+    "lines": [
+      "We don't sell fitness.",
+      "We don't sell hype.",
+      "We sell the room where the work happens —",
+      "and the silence to hear yourself in it."
+    ],
+    "signoff": "— Alpha"
+  },
+  "space": {
+    "eyebrow": "The Space",
+    "title": "Built for the work.",
+    "subtitle": "Combo racks. Olympic platforms. Real iron. Open until midnight, every day.",
+    "stats": [
+      { "value": "8", "label": "Power Racks" },
+      { "value": "4", "label": "Platforms" },
+      { "value": "0", "label": "Crowds" },
+      { "value": "24/7", "label": "Access" }
+    ]
+  },
+  "disciplines": {
+    "eyebrow": "Disciplines",
+    "title": "Train every way that matters.",
+    "items": [
+      {
+        "name": "Powerlifting",
+        "tag": "Flagship",
+        "desc": "Combo racks, competition bars, calibrated plates. The best powerlifting room in Sharjah — and our members will tell you so."
+      },
+      {
+        "name": "Bodybuilding",
+        "tag": "Classic",
+        "desc": "Hammer, Cybex, full dumbbell racks to 60kg. Mirrors when you need them. Quiet when you don't."
+      },
+      {
+        "name": "Boxing & Kickboxing",
+        "tag": "Combat",
+        "desc": "Dedicated martial arts area. Heavy bags, ring time, pad work. Coached classes and open sessions."
+      },
+      {
+        "name": "Personal Training",
+        "tag": "1-on-1",
+        "desc": "Programmed coaching with experienced Emirati and international trainers. Strength, hypertrophy, conditioning."
+      },
+      {
+        "name": "Physiotherapy",
+        "tag": "Recovery",
+        "desc": "Sports massage, injury treatment, mobility work. In-house specialists keep you moving."
+      },
+      {
+        "name": "Ice Bath",
+        "tag": "Recovery",
+        "desc": "Cold immersion for recovery and resilience. After the work, the cold."
+      }
+    ]
+  },
+  "coaches": {
+    "eyebrow": "The Coaches",
+    "title": "Known by name.",
+    "subtitle": "Not staff. Not employees. The reason members stay.",
+    "list": [
+      {
+        "name": "Coach Rashid",
+        "role": "Head Coach",
+        "spec": "Strength · Powerlifting"
+      },
+      {
+        "name": "Captain Masood",
+        "role": "Floor Lead",
+        "spec": "Bodybuilding · Programming"
+      },
+      {
+        "name": "Coach Ali Al Maazmi",
+        "role": "Champion Coach",
+        "spec": "Competition Prep"
+      }
+    ]
+  },
+  "meals": {
+    "eyebrow": "Eat × Socialize",
+    "title": "Fuel that matches the work.",
+    "subtitle": "Monthly meal subscriptions, prepped daily. High protein. Low carb. Real food.",
+    "tags": ["Healthy Meals", "High Protein", "Low Carb"],
+    "plans": [
+      { "meals": "2", "label": "Meals / day", "price": "1,100", "currency": "AED" },
+      { "meals": "3", "label": "Meals / day", "price": "1,500", "currency": "AED" },
+      { "meals": "4", "label": "Meals / day", "price": "2,000", "currency": "AED" },
+      { "meals": "5", "label": "Meals / day", "price": "2,300", "currency": "AED" }
+    ],
+    "footnote": "Prices per month. Delivery available within Sharjah."
+  },
+  "voices": {
+    "eyebrow": "Voices",
+    "title": "What members say.",
+    "quotes": [
+      {
+        "text": "The best powerlifting gym in Sharjah. If you are looking for combo racks, this is the spot. Great atmosphere and community.",
+        "name": "Steve Lalan"
+      },
+      {
+        "text": "Not crowded. Feel comfortable. Staff anytime ready to help.",
+        "name": "Aliya Ahmed"
+      },
+      {
+        "text": "Like one team and brothers.",
+        "name": "Abdulrahman"
+      },
+      {
+        "text": "Old-school based gym. Friendly staff. Great services. Quiet vibe. Always upping their game.",
+        "name": "Bloomy Loomy"
+      },
+      {
+        "text": "An excellent, quiet, and psychologically comfortable gym. Qualified trainers. Healthy meals. Sports massage. Injury treatment.",
+        "name": "Dr. Mohammed Karkeet"
+      }
+    ]
+  },
+  "membership": {
+    "eyebrow": "Membership",
+    "title": "Become Alpha.",
+    "subtitle": "Reasonable pricing. Real access. No tiers, no upsells inside — just iron and the room.",
+    "plans": [
+      { "name": "Monthly", "price": "300", "period": "/ month", "highlight": false, "perks": ["Full access", "All equipment", "Open until midnight"] },
+      { "name": "Quarterly", "price": "600", "period": "/ 3 months", "highlight": false, "perks": ["Save 300 AED", "Full access", "All equipment"] },
+      { "name": "Half Year", "price": "1,100", "period": "/ 6 months", "highlight": false, "perks": ["Save 700 AED", "Full access", "Free progress check-ins"] },
+      { "name": "Alpha", "price": "2,000", "period": "/ year", "highlight": true, "perks": ["Save 1,600 AED", "Full access", "Priority booking", "Locker included"] }
+    ],
+    "currency": "AED",
+    "cta": "Start now"
+  },
+  "cta": {
+    "title": "Ready?",
+    "subtitle": "Walk in. We'll show you around.",
+    "phone": "054 238 8500",
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "directions": "Directions"
+  },
+  "footer": {
+    "address_line_1": "Maghreb St, Industrial Area 6",
+    "address_line_2": "Sharjah, United Arab Emirates",
+    "hours_label": "Hours",
+    "hours_value": "Open daily · Closes 12:00 AM",
+    "phone_label": "Phone",
+    "rating_label": "Google Reviews",
+    "rating_value": "4.9 ★ (55 reviews)",
+    "rights": "© 2026 Alpha Gym. All rights reserved.",
+    "tagline_small": "No crowds. No noise. Just work."
+  }
+}
